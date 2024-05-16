@@ -15,12 +15,14 @@ import mate.academy.rickandmorty.dto.external.RickAndMortyResponseDataDto;
 import mate.academy.rickandmorty.mapper.CharacterMapper;
 import mate.academy.rickandmorty.repository.CharacterRepository;
 import mate.academy.rickandmorty.service.ApiClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class RickAndMortyClient implements ApiClient {
-    private static final String BASE_URL = "https://rickandmortyapi.com/api/character";
+    @Value("${external.api.base.url}")
+    private String baseUrl;
     private final ObjectMapper objectMapper;
     private final CharacterRepository repository;
     private final CharacterMapper characterMapper;
@@ -32,7 +34,7 @@ public class RickAndMortyClient implements ApiClient {
 
     @Override
     public List<CharacterApiResponseDto> fetchData() {
-        RickAndMortyResponseDataDto characterData = getCharacterData(BASE_URL);
+        RickAndMortyResponseDataDto characterData = getCharacterData(baseUrl);
         List<CharacterApiResponseDto> characterList = new ArrayList<>(characterData.results());
         while (characterData.info().next() != null) {
             characterData = getCharacterData(characterData.info().next());

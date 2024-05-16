@@ -8,6 +8,7 @@ import mate.academy.rickandmorty.exception.NoSuchCharacterException;
 import mate.academy.rickandmorty.mapper.CharacterMapper;
 import mate.academy.rickandmorty.repository.CharacterRepository;
 import mate.academy.rickandmorty.service.CharacterService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public List<CharacterResponseDto> getAllByName(String name) {
-        return mapper.toDto(repository.findAllByNameContainsIgnoreCase(name));
+    public List<CharacterResponseDto> getAllByName(Pageable pageable, String name) {
+        return mapper.toDto(repository.findAllByNameContainsIgnoreCase(pageable, name));
     }
 }
