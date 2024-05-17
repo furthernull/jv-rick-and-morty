@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class CharacterServiceImpl implements CharacterService {
     private final CharacterRepository repository;
     private final CharacterMapper mapper;
-    private final Random random = new Random();
+    private final Random random;
 
     @Override
     public CharacterResponseDto getRandomCharacter() {
@@ -27,7 +27,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public List<CharacterResponseDto> getAllByName(Pageable pageable, String name) {
+    public List<CharacterResponseDto> findAllByName(Pageable pageable, String name) {
         return mapper.toDto(repository.findAllByNameContainsIgnoreCase(pageable, name));
     }
 }

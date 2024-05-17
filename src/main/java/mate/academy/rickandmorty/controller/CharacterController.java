@@ -36,6 +36,6 @@ public class CharacterController {
             @ParameterObject @PageableDefault Pageable pageable,
             @RequestParam String name
     ) {
-        return characterService.getAllByName(pageable, name);
+        return characterService.findAllByName(pageable, name);
     }
 }

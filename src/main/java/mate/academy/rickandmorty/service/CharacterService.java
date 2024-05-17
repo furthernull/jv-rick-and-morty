@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface CharacterService {
     CharacterResponseDto getRandomCharacter();
 
-    List<CharacterResponseDto> getAllByName(Pageable pageable, String name);
+    List<CharacterResponseDto> findAllByName(Pageable pageable, String name);
 }
